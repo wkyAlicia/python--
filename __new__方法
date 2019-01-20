@@ -1,0 +1,38 @@
+__new__至少要有一个参数cls，代表要实例化的类，此参数在实例化时由Python解释器自动提供
+
+__new__必须要有返回值，返回实例化出来的实例，这点在自己实现__new__时要特别注意，可以return父类__new__出来的实例，或者直接是object的__new__出来的实例
+
+class A(object):
+    def __init__(self):
+        print("这是 init 方法")
+
+    def __new__(cls):
+        print("这是 new 方法")
+        return object.__new__(cls)
+
+A()
+
+
+单例
+举个常见的单例模式例子，我们日常使用的电脑上都有一个回收站，在整个操作系统中，回收站只能有一个实例，整个系统都使用这个唯一的实例，而且回收站自行提供自己的实例。因此回收站是单例模式的应用。
+确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例，这个类称为单例类，单例模式是一种对象创建型模式。
+In [12]: class Singleton(object):
+    ...:     __instance = None
+    ...: 
+    ...:     def __new__(cls, age, name):
+    ...:         if not cls.__instance:
+    ...:             cls.__instance = object.__new__(cls)
+    ...:         return cls.__instance
+    ...: 
+    ...: a = Singleton(18, "dongGe")
+    ...: b = Singleton(8, "dongGe")
+    ...: 
+    ...: print(id(a))
+    ...: print(id(b))
+    ...: 
+    ...: a.age = 19
+    ...: print(b.age)
+    ...: 
+4391023224
+4391023224
+19
