@@ -47,3 +47,21 @@ print(id(gailun.name))
 # 同一个类的不同对象，实例方法共享
 print(id(taidamier.move())) 
 print(id(gailun.move()))
+
+
+__str__()方法
+def __str__(self):
+        """
+            这个方法是一个魔法方法 (Magic Method) ，用来显示信息
+            该方法需要 return 一个数据，并且只有self一个参数，当在类的外部 print(对象) 则打印这个数据
+        """
+        return "英雄 <%s> 数据： 生命值 %d, 攻击力 %d, 护甲值 %d" % (self.name, self.hp, self.atk, self.armor)
+
+__del__()方法
+创建对象后，python解释器默认调用__init__()方法；
+当删除对象时，python解释器也会默认调用一个方法，这个方法为__del__()方法
+def __del__(self):
+        print("__del__方法被调用")
+        print("%s 被 GM 干掉了..." % self.name)
+当有变量保存了一个对象的引用时，此对象的引用计数就会加1；
+当使用del() 删除变量指向的对象时，则会减少对象的引用计数。如果对象的引用计数不为1，那么会让这个对象的引用计数减1，当对象的引用计数为0的时候，则对象才会被真正删除（内存被回收）。
