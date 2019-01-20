@@ -1,0 +1,7 @@
+# class Hero:  # 经典类（旧式类）定义形式
+# class Hero():
+class Hero(object):  # 新式类定义形式
+    def info(self):
+    
+        
+        
